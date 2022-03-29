@@ -9,24 +9,24 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('admin.posts.store') }}" method="POST">
+    <form action="{{ route('admin.posts.update', $post->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">
             <label for="title">Titolo</label>
             <input type="text" name="title" class="form-control" id="title" placeholder="Inserisci il titolo"
-                value="{{ old('title') }}">
+                value="{{ old('title', $post->title) }}">
         </div>
         <div class="form-group">
             <label for="content">Contenuto</label>
             <textarea class="form-control" id="content" name="content" rows="12" placeholder="Inserisci qui il contenuto">
-                {{ old('content') }}
+                {{ old('content', $post->content) }}
             </textarea>
         </div>
         <div class="form-group">
             <label for="image">Contenuto</label>
             <input type="text" class="form-control" id="image" name="image" placeholder="Inserisci qui l'immagine"
-                value="{{ old('image') }}">
+                value="{{ old('image', $post->image) }}">
         </div>
         <button type=" submit" class="btn btn-success">Conferma modifiche</button>
     </form>
