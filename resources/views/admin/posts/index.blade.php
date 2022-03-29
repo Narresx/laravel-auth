@@ -14,6 +14,7 @@
                             <p class="card-text">{{ $post->created_at }}</p>
                             <div class="d-flex justify-content-between">
                                 <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-primary">Dettagli</a>
+                                <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-warning">Modifica</a>
                                 <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post"
                                     id="delete_form">
                                     @method('DELETE')
