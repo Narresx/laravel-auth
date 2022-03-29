@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -37,7 +38,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->vaidate([
+        'title' =>'required|string|min:2|max:75',
+        'content' =>'string',
+        'image' =>'url'
+        ]);
+
+        $data = $request->all();
+        $post = new Post();
+        $data['slug']= St::slug($request->title, '-');
+        $post->fill($data);
     }
 
     /**
@@ -80,8 +91,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect('admin.posts.index');
     }
 }
